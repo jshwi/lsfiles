@@ -27,6 +27,7 @@ description = "Path object VC index"
 license = "MIT"
 name = "lsfiles"
 version = "0.1.0"
+readme = "README.rst"
 
 [tool.poetry.dependencies]
 gitspy = "^0.1.0"
