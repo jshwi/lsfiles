@@ -20,6 +20,9 @@ lsfiles
     :alt: black
 
 Path object VC index
+--------------------
+
+Index versioned .py files
 
 Install
 -------
@@ -35,41 +38,80 @@ Usage
 -----
 
 
+The ``LSFiles`` instance is a list-like object instantiated with an empty index
+
 .. code-block:: python
 
     >>> from lsfiles import LSFiles
     >>> from pathlib import Path
-    >>> files = LSFiles()  # begin with an empty index
-    >>> # the `LSFiles` object is a mutable sequence (list-like object)
-    >>> print(files)
-    <LSFiles []>
-    >>> # `lsfiles` is designed to work with `git`, and only versioned files
-    >>> # are indexed
-    >>> # $ git init
-    >>> files.populate()  # <LSFiles []>
-    >>> # $ git add .
-    >>> files.populate()  # <LSFiles [PosixPath(...), ...]>
-    >>> files.clear()  # clear the index
-    >>> print(files)
-    <LSFiles []>
-    >>> # as `lsfiles` is an index of unique file paths, its implementation
-    >>> # of extend prevents duplicates
-    >>> values = [Path.cwd() / "1", Path.cwd() / "1"]
-    >>> files.extend(values)  # <LSFiles [PosixPath('.../lsfiles/1')]>
-    >>> files.clear()
-    >>> # reduce minimizes index to directories and individual files
-    >>> # the list value is returned, leaving `LSFiles` unaltered
-    >>> values = [
-    ...     Path.cwd() / "f1",
-    ...     Path.cwd() / 'd1' / "1",
-    ...     Path.cwd() / 'd1' / "2",
-    ... ]
-    >>> files.extend(values)
-    >>> files.reduce() # -> [PosixPath('.../f1'), PosixPath('.../d1')]
-    >>> # exclusions are evaluated by their basename, and does not have
-    >>> # have to be an absolute path
-    >>> # exclusions can be added on instantiation
-    >>> files = LSFiles("f1")
-    >>> # or with the add exclusions method
+    >>>
     >>> files = LSFiles()
-    >>> files.add_exclusions()
+    >>> files
+    <LSFiles []>
+
+
+The ``LSFiles`` index calls ``git ls-files`` and only versioned files are indexed
+
+.. code-block:: python
+
+    >>> files.populate()
+    >>> for path in sorted([p.relative_to(Path.cwd()) for p in files]):
+    ...     print(path)
+    docs/conf.py
+    lsfiles/__init__.py
+    lsfiles/_indexing.py
+    lsfiles/_objects.py
+    lsfiles/_version.py
+    tests/__init__.py
+    tests/_environ.py
+    tests/_test.py
+    tests/conftest.py
+    whitelist.py
+
+The ``LSFiles`` instance is an index of unique file paths
+
+It's implementation of ``extend`` prevents duplicates
+
+.. code-block:: python
+
+    >>> p1 = Path.cwd() / "f1"
+    >>> p2 = Path.cwd() / "f1"
+    >>>
+    >>> files = LSFiles()
+    >>> files.extend([p1, p2])
+    >>> sorted([p.relative_to(Path.cwd()) for p in files.reduce()])
+    [PosixPath('f1')]
+
+Reduce minimizes index to directories and individual files relative to the current working dir
+
+The list value is returned, leaving the instance unaltered
+
+.. code-block:: python
+
+    >>> p1 = Path.cwd() / "f1"
+    >>>
+    >>> d = Path.cwd() / "dir"
+    >>> p2 = d / "f2"
+    >>> p3 = d / "f3"
+    >>>
+    >>> files = LSFiles()
+    >>> files.extend([p1, p2, p3])
+    >>> sorted(p.relative_to(Path.cwd()) for p in files.reduce())
+    [PosixPath('dir'), PosixPath('f1')]
+
+Exclusions can be added on instantiation
+
+Exclusions are evaluated by their basename, and does not have to be an absolute path
+
+.. code-block:: python
+
+    >>> p1 = Path.cwd() / "docs" / "conf.py"
+    >>> p2 = Path.cwd() / "lsfiles" / "__init__.py"
+    >>>
+    >>> files = LSFiles(p1.name)
+    >>> files.populate()
+    >>>
+    >>> ps = [str(p) for p in files]
+    >>>
+    >>> assert not str(p1) in ps
+    >>> assert str(p2) in ps
