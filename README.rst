@@ -3,6 +3,9 @@ lsfiles
 .. image:: https://github.com/jshwi/lsfiles/actions/workflows/ci.yml/badge.svg
     :target: https://github.com/jshwi/lsfiles/actions/workflows/ci.yml
     :alt: ci
+.. image:: https://github.com/jshwi/lsfiles/actions/workflows/codeql-analysis.yml/badge.svg
+    :target: https://github.com/jshwi/lsfiles/actions/workflows/codeql-analysis.yml
+    :alt: CodeQL
 .. image:: https://img.shields.io/badge/python-3.8-blue.svg
     :target: https://www.python.org/downloads/release/python-380
     :alt: python3.8
