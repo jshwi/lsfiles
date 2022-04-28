@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>README &#8212; lsfiles 0.1.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphite.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="lsfiles" href="lsfiles.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lsfiles.html" title="lsfiles"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lsfiles 0.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">README</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="readme">
+<h1>README<a class="headerlink" href="#readme" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://github.com/jshwi/lsfiles/actions/workflows/ci.yml"><img alt="ci" src="https://github.com/jshwi/lsfiles/actions/workflows/ci.yml/badge.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/jshwi/lsfiles/actions/workflows/codeql-analysis.yml"><img alt="CodeQL" src="https://github.com/jshwi/lsfiles/actions/workflows/codeql-analysis.yml/badge.svg" /></a>
+<a class="reference external image-reference" href="https://lsfiles.readthedocs.io/en/latest/?badge=latest"><img alt="readthedocs.org" src="https://readthedocs.org/projects/lsfiles/badge/?version=latest" /></a>
+<a class="reference external image-reference" href="https://www.python.org/downloads/release/python-380"><img alt="python3.8" src="https://img.shields.io/badge/python-3.8-blue.svg" /></a>
+<a class="reference external image-reference" href="https://img.shields.io/pypi/v/lsfiles"><img alt="pypi" src="https://img.shields.io/pypi/v/lsfiles" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/jshwi/lsfiles"><img alt="codecov.io" src="https://codecov.io/gh/jshwi/lsfiles/branch/master/graph/badge.svg" /></a>
+<a class="reference external image-reference" href="https://lbesson.mit-license.org/"><img alt="mit" src="https://img.shields.io/badge/License-MIT-blue.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/psf/black"><img alt="black" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
+<section id="path-object-vc-index">
+<h2>Path object VC index<a class="headerlink" href="#path-object-vc-index" title="Permalink to this headline">¶</a></h2>
+<p>Index versioned .py files</p>
+</section>
+<section id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">lsfiles</span></code></p>
+</section>
+<section id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">install</span></code></p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">LSFiles</span></code> instance is a list-like object instantiated with an empty index</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lsfiles</span> <span class="kn">import</span> <span class="n">LSFiles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="n">LSFiles</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span>
+<span class="go">&lt;LSFiles []&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">LSFiles</span></code> index calls <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">ls-files</span></code> and only versioned files are indexed</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">files</span><span class="o">.</span><span class="n">populate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">())</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">files</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="go">docs/conf.py</span>
+<span class="go">lsfiles/__init__.py</span>
+<span class="go">lsfiles/_indexing.py</span>
+<span class="go">lsfiles/_objects.py</span>
+<span class="go">lsfiles/_version.py</span>
+<span class="go">tests/__init__.py</span>
+<span class="go">tests/_environ.py</span>
+<span class="go">tests/_test.py</span>
+<span class="go">tests/conftest.py</span>
+<span class="go">whitelist.py</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">LSFiles</span></code> instance is an index of unique file paths</p>
+<p>It’s implementation of <code class="docutils literal notranslate"><span class="pre">extend</span></code> prevents duplicates</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;f1&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;f1&quot;</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="n">LSFiles</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">())</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">reduce</span><span class="p">()])</span>
+<span class="go">[PosixPath(&#39;f1&#39;)]</span>
+</pre></div>
+</div>
+<p>Reduce minimizes index to directories and individual files relative to the current working dir</p>
+<p>The list value is returned, leaving the instance unaltered</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;f1&quot;</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;dir&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="s2">&quot;f2&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p3</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="s2">&quot;f3&quot;</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="n">LSFiles</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">())</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">reduce</span><span class="p">())</span>
+<span class="go">[PosixPath(&#39;dir&#39;), PosixPath(&#39;f1&#39;)]</span>
+</pre></div>
+</div>
+<p>Exclusions can be added on instantiation</p>
+<p>Exclusions are evaluated by their basename, and does not have to be an absolute path</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;docs&quot;</span> <span class="o">/</span> <span class="s2">&quot;conf.py&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;lsfiles&quot;</span> <span class="o">/</span> <span class="s2">&quot;__init__.py&quot;</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="n">LSFiles</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span><span class="o">.</span><span class="n">populate</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">files</span><span class="p">]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ps</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="lsfiles.html">lsfiles</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#path-object-vc-index">Path object VC index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lsfiles.html" title="lsfiles"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lsfiles 0.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">README</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Stephen Whitlock.
+    </div>
+  </body>
+</html>
