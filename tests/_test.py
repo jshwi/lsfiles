@@ -10,6 +10,7 @@ from gitspy import Git
 
 from lsfiles import LSFiles
 
+from . import DIR, DOTFILES, FILE_1, NESTED, SRC
 from ._environ import FILES, GITIGNORE, INIT, REPO, WHITELIST_PY
 
 
@@ -17,10 +18,10 @@ from ._environ import FILES, GITIGNORE, INIT, REPO, WHITELIST_PY
     "make_relative_file,assert_relative_item,assert_true",
     [
         (FILES, FILES, True),
-        (Path("nested") / "python" / "file" / FILES, "nested", True),
+        (Path(NESTED) / "python" / "file" / FILES, NESTED, True),
         (WHITELIST_PY, "whitelist.py", False),
     ],
-    ids=["file", "nested", "exclude"],
+    ids=["file", NESTED, "exclude"],
 )
 def test_get_files(
     git: Git,
@@ -64,13 +65,13 @@ def test_files_exclude_venv(lsfiles, make_tree: t.Any) -> None:
     make_tree(
         project_dir,
         {
-            REPO: {"src": {INIT: None}},
+            REPO: {SRC: {INIT: None}},
             "venv": {
                 "pyvenv.cfg": None,
                 "bin": {},
                 "include": {},
                 "share": {},
-                "src": {},
+                SRC: {},
                 "lib": {"python3.8": {"site-packages": {"six.py": None}}},
                 "lib64": "lib",
             },
@@ -111,7 +112,7 @@ def test_args_reduce(git, lsfiles, make_tree: t.Any) -> None:
     make_tree(
         Path.cwd(),
         {
-            "dotfiles": {
+            DOTFILES: {
                 "vim": {
                     "bundle": {  # this dir should be ignored
                         "ctags": {
@@ -127,7 +128,7 @@ def test_args_reduce(git, lsfiles, make_tree: t.Any) -> None:
                 },
                 "ipython_config.py": None,
             },
-            "src": {"__init__.py": None},
+            SRC: {"__init__.py": None},
         },
     )
     git.add(".")
@@ -141,7 +142,7 @@ def test_args_reduce(git, lsfiles, make_tree: t.Any) -> None:
     # ``bundle``
     assert all(
         i in reduced
-        for i in (str(Path.cwd() / "dotfiles"), str(Path.cwd() / "src"))
+        for i in (str(Path.cwd() / DOTFILES), str(Path.cwd() / SRC))
     )
 
     # therefore, the ``reduce`` argument should be used sparingly as in
@@ -149,8 +150,8 @@ def test_args_reduce(git, lsfiles, make_tree: t.Any) -> None:
     assert all(
         i in normal
         for i in (
-            str(Path.cwd() / "src" / "__init__.py"),
-            str(Path.cwd() / "dotfiles" / "ipython_config.py"),
+            str(Path.cwd() / SRC / "__init__.py"),
+            str(Path.cwd() / DOTFILES / "ipython_config.py"),
         )
     )
 
@@ -159,13 +160,13 @@ def test_files_extend_no_dupes(lsfiles) -> None:
     """Test files extend does not index duplicates."""
     files_before = sorted(
         [
-            Path.cwd() / "dir" / "file1.py",
-            Path.cwd() / "dir" / "file1.py",
+            Path.cwd() / DIR / FILE_1,
+            Path.cwd() / DIR / FILE_1,
             Path.cwd() / "file2.py",
         ]
     )
     files_after = sorted(
-        [Path.cwd() / Path("dir", "file1.py"), Path.cwd() / Path("file2.py")]
+        [Path.cwd() / Path(DIR, FILE_1), Path.cwd() / Path("file2.py")]
     )
     lsfiles.extend(files_before)
     assert sorted(lsfiles) == files_after
