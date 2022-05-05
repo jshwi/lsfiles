@@ -30,7 +30,7 @@ readme = "README.rst"
 version = "0.1.1"
 
 [tool.poetry.dependencies]
-gitspy = "^0.1.0"
+gitspy = "^0"
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]

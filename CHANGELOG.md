@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [Unreleased](https://github.com/jshwi/lsfiles/compare/v0.1.1...HEAD)
 ------------------------------------------------------------------------
+### Fixed
+- Relaxes version constraints on `gitspy`'
 
 [0.1.1](https://github.com/jshwi/lsfiles/releases/tag/v0.1.1) - 2022-01-09
 ------------------------------------------------------------------------
