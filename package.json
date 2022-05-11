@@ -36,10 +36,11 @@
     "url": "git+https://github.com/jshwi/lsfiles.git"
   },
   "keywords": [
-    "audit",
-    "fix",
-    "ci",
-    "python3.8"
+    "git",
+    "lsfiles",
+    "index",
+    "path",
+    "oop"
   ],
   "author": "Stephen Whitlock",
   "license": "MIT",
