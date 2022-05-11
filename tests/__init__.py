@@ -1,4 +1,9 @@
-"""Register tests as a package."""
+"""
+tests
+=====
+
+Test package for ``lsfiles``.
+"""
 DIR = "dir"
 DOTFILES = "dotfiles"
 FILE_1 = "file1.py"
