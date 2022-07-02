@@ -20,7 +20,7 @@ class LSFiles(_MutableSequence):
     :param exclude: List of paths to exclude.
     """
 
-    def __init__(self, exclude: _t.Optional[_t.List[str]] = None) -> None:
+    def __init__(self, exclude: _t.List[str] | None = None) -> None:
         super().__init__()
         self._exclude = exclude or []
 
