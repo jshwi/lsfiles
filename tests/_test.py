@@ -35,6 +35,8 @@ def test_get_files(
     Test for standard files, nested directories (only return the
     directory root) or files that are excluded.
 
+    :param git: Instantiated ``Git`` object.
+    :param lsfiles: Instantiated ``LSFiles`` object.
     :param make_relative_file: Relative path to Python file.
     :param assert_relative_item: Relative path to Python item to check
         for.
@@ -59,6 +61,7 @@ def test_files_exclude_venv(lsfiles, make_tree: t.Any) -> None:
 
      Test when indexing with ``PythonItems.items``.
 
+    :param lsfiles: Instantiated ``LSFiles`` object.
     :param make_tree: Create directory tree from dict mapping.
     """
     project_dir = Path.cwd()
@@ -88,7 +91,10 @@ def test_files_exclude_venv(lsfiles, make_tree: t.Any) -> None:
 
 
 def test_seq(lsfiles) -> None:
-    """Get coverage on ``Seq`` abstract methods."""
+    """Get coverage on ``Seq`` abstract methods.
+
+    :param lsfiles: Instantiated ``LSFiles`` object.
+    """
     lsfiles.append("key")
     assert lsfiles[0] == "key"
     lsfiles[0] = "value"
@@ -103,6 +109,8 @@ def test_args_reduce(git, lsfiles, make_tree: t.Any) -> None:
 
     No longer considered depreciated.
 
+    :param git: Instantiated ``Git`` object.
+    :param lsfiles: Instantiated ``LSFiles`` object.
     :param make_tree: Create directory tree from dict mapping.
     """
     # ignore the bundle dir, including containing python files
@@ -157,7 +165,10 @@ def test_args_reduce(git, lsfiles, make_tree: t.Any) -> None:
 
 
 def test_files_extend_no_dupes(lsfiles) -> None:
-    """Test files extend does not index duplicates."""
+    """Test files extend does not index duplicates.
+
+    :param lsfiles: Instantiated ``LSFiles`` object.
+    """
     files_before = sorted(
         [
             Path.cwd() / DIR / FILE_1,
