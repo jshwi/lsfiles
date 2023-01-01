@@ -80,6 +80,7 @@ pyaud = "^3.13.4"
 pylint = "2.15.9"
 pytest = "^7.1.2"
 restview = "^3.0.0"
+sphinx-toolbox = "^3.2.0"
 
 [tool.pyaud.audit]
 modules = [
