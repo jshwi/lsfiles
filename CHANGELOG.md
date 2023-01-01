@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [Unreleased](https://github.com/jshwi/lsfiles/compare/v0.1.2...HEAD)
 ------------------------------------------------------------------------
+### Added
+- Add py.typed
 
 [0.1.2](https://github.com/jshwi/lsfiles/releases/tag/v0.1.2) - 2022-05-05
 ------------------------------------------------------------------------
