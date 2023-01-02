@@ -61,9 +61,7 @@ class LSFiles(_MutableSequence):
         """
         project_dir = _Path.cwd()
         return list(
-            set(
-                project_dir / p.relative_to(project_dir).parts[0] for p in self
-            )
+            {project_dir / p.relative_to(project_dir).parts[0] for p in self}
         )
 
     def args(self, reduce: bool = False) -> _t.Tuple[str, ...]:
