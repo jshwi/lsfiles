@@ -15,7 +15,10 @@ _git = _Git()
 
 
 class LSFiles(_MutableSequence):
-    """Index all Python files in project."""
+    """Index all Python files in project.
+
+    :param exclude: List of paths to exclude.
+    """
 
     def __init__(self, exclude: _t.Optional[_t.List[str]] = None) -> None:
         super().__init__()
