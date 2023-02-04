@@ -33,4 +33,5 @@ class MutableSequence(_MutableSequence):
         :param index: ``list`` index to insert ``value``.
         :param value: Value to insert into list.
         """
-        self._list.insert(index, value)
+        if value not in self._list:
+            self._list.insert(index, value)

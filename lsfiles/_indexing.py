@@ -31,15 +31,6 @@ class LSFiles(_MutableSequence):
         """
         self._exclude.extend(exclusions)
 
-    def extend(self, values: _t.Iterable[_Path]) -> None:
-        """Like extend for a regular list but cannot duplicate.
-
-        :param values: Method expects an iterable of ``pathlib.Path``
-            objects.
-        """
-        super().extend(values)
-        self._list = list(set(self))
-
     def populate(self) -> None:
         """Populate object with index of versioned Python files."""
         _git.ls_files(capture=True)
