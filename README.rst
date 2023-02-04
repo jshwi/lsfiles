@@ -6,9 +6,9 @@ lsfiles
 .. image:: https://img.shields.io/pypi/v/lsfiles
     :target: https://pypi.org/project/lsfiles/
     :alt: PyPI
-.. image:: https://github.com/jshwi/lsfiles/actions/workflows/ci.yml/badge.svg
-    :target: https://github.com/jshwi/lsfiles/actions/workflows/ci.yml
-    :alt: CI
+.. image:: https://github.com/jshwi/lsfiles/actions/workflows/build.yaml/badge.svg
+    :target: https://github.com/jshwi/lsfiles/actions/workflows/build.yaml
+    :alt: Build
 .. image:: https://github.com/jshwi/lsfiles/actions/workflows/codeql-analysis.yml/badge.svg
     :target: https://github.com/jshwi/lsfiles/actions/workflows/codeql-analysis.yml
     :alt: CodeQL
