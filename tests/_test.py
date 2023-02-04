@@ -10,7 +10,7 @@ from gitspy import Git
 
 from lsfiles import LSFiles
 
-from . import DIR, DOTFILES, FILE_1, NESTED, SRC
+from . import DIR, DOTFILES, FILE_1, NESTED, SRC, WHITELIST
 from ._environ import FILES, GITIGNORE, INIT, REPO, WHITELIST_PY
 
 
@@ -19,7 +19,7 @@ from ._environ import FILES, GITIGNORE, INIT, REPO, WHITELIST_PY
     [
         (FILES, FILES, True),
         (Path(NESTED) / "python" / "file" / FILES, NESTED, True),
-        (WHITELIST_PY, "whitelist.py", False),
+        (WHITELIST_PY, WHITELIST, False),
     ],
     ids=["file", NESTED, "exclude"],
 )
@@ -181,3 +181,23 @@ def test_files_extend_no_dupes(lsfiles) -> None:
     )
     lsfiles.extend(files_before)
     assert sorted(lsfiles) == files_after
+
+
+def test_regex(lsfiles, git, make_tree) -> None:
+    """Test populate with regex.
+
+    :param lsfiles: Instantiated ``LSFiles`` object.
+    :param git: Instantiated ``Git`` object.
+    :param make_tree: Create directory tree from dict mapping.
+    """
+    path1 = Path.cwd() / "docs" / "conf.py"
+    path2 = Path.cwd() / WHITELIST
+    make_tree(Path.cwd(), {"docs": {"conf.py": None}, WHITELIST: None})
+    git.add(".")
+    lsfiles.populate_regex()
+    assert path1 in lsfiles
+    assert path2 in lsfiles
+    lsfiles.clear()
+    lsfiles.populate_regex(r"whitelist\.py|docs\/conf\.py")
+    assert path1 not in lsfiles
+    assert path2 not in lsfiles

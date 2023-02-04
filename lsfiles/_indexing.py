@@ -4,6 +4,7 @@ lsfiles._indexing
 """
 from __future__ import annotations
 
+import re as _re
 import typing as _t
 from pathlib import Path as _Path
 
@@ -43,6 +44,18 @@ class LSFiles(_MutableSequence):
             # only include Python files in index
             and p.name.endswith(".py")
         )
+
+    def populate_regex(self, exclude: str | None = None) -> None:
+        """Populate object with index of versioned Python files.
+
+        :param exclude: Regex of files to exclude.
+        """
+        _git.ls_files(capture=True)
+        for path in _git.stdout():
+            if path.endswith(".py") and (
+                not exclude or _re.match(exclude, path) is None
+            ):
+                self.append(_Path.cwd() / path)
 
     def reduce(self) -> _t.List[_Path]:
         """Get all relevant python files starting from project root.
