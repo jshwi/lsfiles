@@ -52,11 +52,11 @@ def fixture_mock_environment(
     git.init(devnull=True)
     config = ConfigParser(default_section="")
     config.read_dict(
-        dict(
-            user={"name": GH_NAME, "email": GH_EMAIL},
-            advice={"detachedHead": "false"},
-            init={"defaultBranch": "master"},
-        )
+        {
+            "user": {"name": GH_NAME, "email": GH_EMAIL},
+            "advice": {"detachedHead": "false"},
+            "init": {"defaultBranch": "master"},
+        }
     )
     with open(Path.home() / ".gitconfig", "w", encoding="utf-8") as fout:
         config.write(fout)
