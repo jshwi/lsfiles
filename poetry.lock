@@ -104,14 +104,14 @@ files = [
 
 [[package]]
 name = "astroid"
-version = "2.14.1"
+version = "2.14.2"
 description = "An abstract syntax tree for Python with inference support."
 category = "dev"
 optional = false
 python-versions = ">=3.7.2"
 files = [
-    {file = "astroid-2.14.1-py3-none-any.whl", hash = "sha256:23c718921acab5f08cbbbe9293967f1f8fec40c336d19cd75dc12a9ea31d2eb2"},
-    {file = "astroid-2.14.1.tar.gz", hash = "sha256:bd1aa4f9915c98e8aaebcd4e71930154d4e8c9aaf05d35ac0a63d1956091ae3f"},
+    {file = "astroid-2.14.2-py3-none-any.whl", hash = "sha256:0e0e3709d64fbffd3037e4ff403580550f14471fd3eaae9fa11cc9a5c7901153"},
+    {file = "astroid-2.14.2.tar.gz", hash = "sha256:a3cf9f02c53dd259144a7e8f3ccd75d67c9a8c716ef183e0c1f291bc5d7bb3cf"},
 ]
 
 [package.dependencies]
@@ -1098,21 +1098,6 @@ files = [
 ]
 
 [[package]]
-name = "m2r"
-version = "0.2.1"
-description = "Markdown and reStructuredText in a single file."
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "m2r-0.2.1.tar.gz", hash = "sha256:bf90bad66cda1164b17e5ba4a037806d2443f2a4d5ddc9f6a5554a0322aaed99"},
-]
-
-[package.dependencies]
-docutils = "*"
-mistune = "*"
-
-[[package]]
 name = "markupsafe"
 version = "2.1.2"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -1230,18 +1215,6 @@ python-versions = ">=3.6"
 files = [
     {file = "mergedeep-1.3.4-py3-none-any.whl", hash = "sha256:70775750742b25c0d8f36c55aed03d24c3384d17c951b3175d898bd778ef0307"},
     {file = "mergedeep-1.3.4.tar.gz", hash = "sha256:0096d52e9dad9939c3d975a774666af186eda617e6ca84df4c94dec30004f2a8"},
-]
-
-[[package]]
-name = "mistune"
-version = "0.8.4"
-description = "The fastest markdown parser in pure Python"
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "mistune-0.8.4-py2.py3-none-any.whl", hash = "sha256:88a1051873018da288eee8538d476dffe1262495144b33ecb586c4ab266bb8d4"},
-    {file = "mistune-0.8.4.tar.gz", hash = "sha256:59a3429db53c50b5c6bcc8a07f8848cb00d7dc8bdb431a4ab41920d201d4756e"},
 ]
 
 [[package]]
@@ -1608,27 +1581,23 @@ tests = ["pytest"]
 
 [[package]]
 name = "pyaud"
-version = "3.13.5"
+version = "5.0.1"
 description = "Framework for writing Python package audits"
 category = "dev"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "pyaud-3.13.5-py3-none-any.whl", hash = "sha256:8d895ee0bf96a52abee47220244ce8c85cba469edd12e8d6cb7a5fad13c7cdd0"},
-    {file = "pyaud-3.13.5.tar.gz", hash = "sha256:5ec4265c1ecd3c488fcc9a263338ed8ad4a06865d607163cf2cc7bd38cc3f27e"},
+    {file = "pyaud-5.0.1-py3-none-any.whl", hash = "sha256:caa6dce30ae2895e70ead10af66dd65bc3e8d49c30cf4cfacd2a189654c77d27"},
+    {file = "pyaud-5.0.1.tar.gz", hash = "sha256:288b600d2377fdd5667ec86bb9f16d211d9af111a1bb21b2058512e4ae646183"},
 ]
 
 [package.dependencies]
-appdirs = ">=1.4.4,<2.0.0"
-environs = ">=9.4.0,<10.0.0"
-gitspy = ">=0,<1"
-lsfiles = ">=0,<1"
-m2r = ">=0.2.1,<0.3.0"
-mistune = "<=0.8.4"
+arcon = ">=0.2.1,<0.3.0"
+gitpython = ">=3.1.30,<4.0.0"
+lsfiles = ">=0.3"
 object-colors = ">=2.0.1,<3.0.0"
-pyaud-plugins = ">=0,<1"
+pyaud-plugins = ">=0.8"
 spall = ">=0,<1"
-toml = ">=0.10.2,<0.11.0"
 
 [[package]]
 name = "pyaud-plugins"
@@ -2752,4 +2721,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "a223c019bf9017db756f1d3aa1c9367f8c643aa419c730a489a49c5e514c4cd5"
+content-hash = "f4a654b76722b360765436e32558a09cb87877921efddf3d563d408347b08985"
