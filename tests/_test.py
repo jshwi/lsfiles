@@ -48,8 +48,7 @@ def test_get_files(
     make_file.parent.mkdir(exist_ok=True, parents=True)
     make_file.touch()
     git.add(".")
-    lsfiles.add_exclusions(WHITELIST_PY)
-    lsfiles.populate()
+    lsfiles.populate([WHITELIST])
     if assert_true:
         assert make_item in lsfiles.reduce()
     else:

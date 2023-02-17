@@ -135,8 +135,8 @@ Exclusions are evaluated by their basename, and does not have to be an absolute 
     >>> p1 = Path.cwd() / "docs" / "conf.py"
     >>> p2 = Path.cwd() / "lsfiles" / "__init__.py"
     >>>
-    >>> files = LSFiles(p1.name)
-    >>> files.populate()
+    >>> files = LSFiles()
+    >>> files.populate([p1.name])
     >>>
     >>> ps = [str(p) for p in files]
     >>>

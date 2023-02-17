@@ -16,21 +16,7 @@ _git = _Git()
 
 
 class LSFiles(_MutableSequence):
-    """Index all Python files in project.
-
-    :param exclude: List of paths to exclude.
-    """
-
-    def __init__(self, exclude: _t.List[str] | None = None) -> None:
-        super().__init__()
-        self._exclude = exclude or []
-
-    def add_exclusions(self, *exclusions: str) -> None:
-        """Add iterable of str objects to exclude from indexing.
-
-        :param exclusions: Iterable of str names to exclude from index.
-        """
-        self._exclude.extend(exclusions)
+    """Index all Python files in project."""
 
     def populate(self, exclude: _t.List[str] | None = None) -> None:
         """Populate object with index of versioned Python files.
@@ -38,13 +24,13 @@ class LSFiles(_MutableSequence):
         :param exclude: List of paths to exclude.
         """
         _git.ls_files(capture=True)
-        self._exclude = exclude or self._exclude
+        exclude = exclude or []
         self.extend(
             _Path.cwd() / p
             for p in [_Path(p) for p in _git.stdout()]
             # exclude any basename, stem, or part of a
             # `pathlib.Path` path
-            if not any(i in self._exclude for i in (*p.parts, p.stem))
+            if not any(i in exclude for i in (*p.parts, p.stem))
             # only include Python files in index
             and p.name.endswith(".py")
         )

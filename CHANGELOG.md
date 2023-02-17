@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add `exclude` parameter to `lsfiles.populate`
 
+### Removed
+- Remove `lsfiles.exclude`
+
 [0.3.0](https://github.com/jshwi/lsfiles/releases/tag/v0.3.0) - 2023-02-05
 ------------------------------------------------------------------------
 ### Added
