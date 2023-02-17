@@ -32,9 +32,13 @@ class LSFiles(_MutableSequence):
         """
         self._exclude.extend(exclusions)
 
-    def populate(self) -> None:
-        """Populate object with index of versioned Python files."""
+    def populate(self, exclude: _t.List[str] | None = None) -> None:
+        """Populate object with index of versioned Python files.
+
+        :param exclude: List of paths to exclude.
+        """
         _git.ls_files(capture=True)
+        self._exclude = exclude or self._exclude
         self.extend(
             _Path.cwd() / p
             for p in [_Path(p) for p in _git.stdout()]
