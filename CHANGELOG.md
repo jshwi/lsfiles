@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add `exclude` parameter to `lsfiles.populate`
 
+### Changed
+- Change `populate` to behave the same as `populate_regex`
+
 ### Removed
 - Remove `lsfiles.exclude`
 

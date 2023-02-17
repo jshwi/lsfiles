@@ -18,27 +18,10 @@ _git = _Git()
 class LSFiles(_MutableSequence):
     """Index all Python files in project."""
 
-    def populate(self, exclude: _t.List[str] | None = None) -> None:
+    def populate(self, exclude: str | None = None) -> None:
         """Populate object with index of versioned Python files.
 
         :param exclude: List of paths to exclude.
-        """
-        _git.ls_files(capture=True)
-        exclude = exclude or []
-        self.extend(
-            _Path.cwd() / p
-            for p in [_Path(p) for p in _git.stdout()]
-            # exclude any basename, stem, or part of a
-            # `pathlib.Path` path
-            if not any(i in exclude for i in (*p.parts, p.stem))
-            # only include Python files in index
-            and p.name.endswith(".py")
-        )
-
-    def populate_regex(self, exclude: str | None = None) -> None:
-        """Populate object with index of versioned Python files.
-
-        :param exclude: Regex of files to exclude.
         """
         _git.ls_files(capture=True)
         for path in _git.stdout():
@@ -46,6 +29,13 @@ class LSFiles(_MutableSequence):
                 not exclude or _re.match(exclude, path) is None
             ):
                 self.append(_Path.cwd() / path)
+
+    def populate_regex(self, exclude: str | None = None) -> None:
+        """Populate object with index of versioned Python files.
+
+        :param exclude: Regex of files to exclude.
+        """
+        self.populate(exclude)
 
     def reduce(self) -> _t.List[_Path]:
         """Get all relevant python files starting from project root.
