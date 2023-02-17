@@ -8,11 +8,9 @@ import re as _re
 import typing as _t
 from pathlib import Path as _Path
 
-from gitspy import Git as _Git
+import git as _git
 
 from ._objects import MutableSequence as _MutableSequence
-
-_git = _Git()
 
 
 class LSFiles(_MutableSequence):
@@ -23,8 +21,8 @@ class LSFiles(_MutableSequence):
 
         :param exclude: List of paths to exclude.
         """
-        _git.ls_files(capture=True)
-        for path in _git.stdout():
+        repo = _git.Repo(_Path.cwd())
+        for path in repo.git.ls_files().splitlines():
             if path.endswith(".py") and (
                 not exclude or _re.match(exclude, path) is None
             ):
