@@ -2,6 +2,8 @@
 tests.conftest
 ==============
 """
+from __future__ import annotations
+
 import os
 import typing as t
 from configparser import ConfigParser
@@ -12,6 +14,7 @@ from gitspy import Git
 
 from lsfiles import LSFiles
 
+from . import FixtureMakeTree
 from ._environ import GH_EMAIL, GH_NAME, REPO
 
 
@@ -63,13 +66,13 @@ def fixture_mock_environment(
 
 
 @pytest.fixture(name="make_tree")
-def fixture_make_tree() -> t.Any:
+def fixture_make_tree() -> FixtureMakeTree:
     """Recursively create directory tree from dict mapping.
 
     :return: Function for using this fixture.
     """
 
-    def _make_tree(root: Path, obj: t.Dict[t.Any, t.Any]) -> None:
+    def _make_tree(root: Path, obj: dict[str, t.Any]) -> None:
         for key, value in obj.items():
             fullpath = root / key
             if isinstance(value, dict):

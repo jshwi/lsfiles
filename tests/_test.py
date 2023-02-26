@@ -2,7 +2,6 @@
 tests._test
 ===========
 """
-import typing as t
 from pathlib import Path
 
 import pytest
@@ -10,7 +9,7 @@ from gitspy import Git
 
 from lsfiles import LSFiles
 
-from . import DIR, DOTFILES, FILE_1, NESTED, SRC, WHITELIST
+from . import DIR, DOTFILES, FILE_1, NESTED, SRC, WHITELIST, FixtureMakeTree
 from ._environ import FILES, GITIGNORE, INIT, REPO, WHITELIST_PY
 
 
@@ -55,7 +54,9 @@ def test_get_files(
         assert make_item not in lsfiles.reduce()
 
 
-def test_files_exclude_venv(lsfiles, make_tree: t.Any) -> None:
+def test_files_exclude_venv(
+    lsfiles: LSFiles, make_tree: FixtureMakeTree
+) -> None:
     """Test that virtualenv dir is excluded.
 
      Test when indexing with ``PythonItems.items``.
@@ -89,21 +90,23 @@ def test_files_exclude_venv(lsfiles, make_tree: t.Any) -> None:
     assert set(lsfiles.reduce()) == set()
 
 
-def test_seq(lsfiles) -> None:
+def test_seq(lsfiles: LSFiles) -> None:
     """Get coverage on ``Seq`` abstract methods.
 
     :param lsfiles: Instantiated ``LSFiles`` object.
     """
-    lsfiles.append("key")
+    lsfiles.append("key")  # type: ignore
     assert lsfiles[0] == "key"
-    lsfiles[0] = "value"
+    lsfiles[0] = "value"  # type: ignore
     assert lsfiles[0] == "value"
     del lsfiles[0]
     assert not lsfiles
     assert repr(lsfiles) == "<LSFiles []>"
 
 
-def test_args_reduce(git, lsfiles, make_tree: t.Any) -> None:
+def test_args_reduce(
+    git: Git, lsfiles: LSFiles, make_tree: FixtureMakeTree
+) -> None:
     """Demonstrate why the ``reduce`` argument should be deprecated.
 
     No longer considered depreciated.
@@ -163,7 +166,7 @@ def test_args_reduce(git, lsfiles, make_tree: t.Any) -> None:
     )
 
 
-def test_files_extend_no_dupes(lsfiles) -> None:
+def test_files_extend_no_dupes(lsfiles: LSFiles) -> None:
     """Test files extend does not index duplicates.
 
     :param lsfiles: Instantiated ``LSFiles`` object.
@@ -182,7 +185,7 @@ def test_files_extend_no_dupes(lsfiles) -> None:
     assert sorted(lsfiles) == files_after
 
 
-def test_regex(lsfiles, git, make_tree) -> None:
+def test_regex(lsfiles: LSFiles, git: Git, make_tree: FixtureMakeTree) -> None:
     """Test populate with regex.
 
     :param lsfiles: Instantiated ``LSFiles`` object.
