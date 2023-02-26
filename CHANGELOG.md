@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 [Unreleased](https://github.com/jshwi/lsfiles/compare/v0.4.0...HEAD)
 ------------------------------------------------------------------------
+### Fixed
+- Fix up types
 
 [0.4.0](https://github.com/jshwi/lsfiles/releases/tag/v0.4.0) - 2023-02-18
 ------------------------------------------------------------------------

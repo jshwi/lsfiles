@@ -25,6 +25,9 @@ ignore_strings = [
 ]
 
 [tool.coverage.report]
+exclude_lines = [
+  "@_t.overload"
+]
 fail_under = 100
 
 [tool.coverage.run]

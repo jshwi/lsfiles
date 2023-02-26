@@ -2,15 +2,18 @@
 lsfiles.objects
 ===============
 """
+from __future__ import annotations
+
 import typing as _t
-from collections.abc import MutableSequence as _MutableSequence
+
+T = _t.TypeVar("T")
 
 
-class MutableSequence(_MutableSequence):
+class MutableSequence(_t.MutableSequence[T]):
     """Inherit to replicate subclassing of ``list`` objects."""
 
     def __init__(self) -> None:
-        self._list: _t.List[_t.Any] = []
+        self._list: list[T] = []
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} {self._list}>"
@@ -18,16 +21,40 @@ class MutableSequence(_MutableSequence):
     def __len__(self) -> int:
         return self._list.__len__()
 
-    def __delitem__(self, key: _t.Any) -> None:
-        self._list.__delitem__(key)
+    @_t.overload
+    def __delitem__(self, i: int) -> None:
+        ...
 
-    def __setitem__(self, index: _t.Any, value: _t.Any) -> None:
-        self._list.__setitem__(index, value)
+    @_t.overload
+    def __delitem__(self, i: slice) -> None:
+        ...
 
-    def __getitem__(self, index: _t.Any) -> _t.Any:
-        return self._list.__getitem__(index)
+    def __delitem__(self, i):
+        return self._list.__delitem__(i)
 
-    def insert(self, index: int, value: str) -> None:
+    @_t.overload
+    def __setitem__(self, i: int, o: T) -> None:
+        ...
+
+    @_t.overload
+    def __setitem__(self, s: slice, o: _t.Iterable[T]) -> None:
+        ...
+
+    def __setitem__(self, i, o):
+        return self._list.__setitem__(i, o)
+
+    @_t.overload
+    def __getitem__(self, i: int) -> T:
+        ...
+
+    @_t.overload
+    def __getitem__(self, s: slice) -> _t.MutableSequence[T]:
+        ...
+
+    def __getitem__(self, i):
+        return self._list.__getitem__(i)
+
+    def insert(self, index: int, value: T) -> None:
         """Insert values into ``_list`` object.
 
         :param index: ``list`` index to insert ``value``.

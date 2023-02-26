@@ -5,7 +5,6 @@ lsfiles._indexing
 from __future__ import annotations
 
 import re as _re
-import typing as _t
 from pathlib import Path as _Path
 
 import git as _git
@@ -13,7 +12,7 @@ import git as _git
 from ._objects import MutableSequence as _MutableSequence
 
 
-class LSFiles(_MutableSequence):
+class LSFiles(_MutableSequence[_Path]):
     """Index all Python files in project."""
 
     def populate(self, exclude: str | None = None) -> None:
@@ -35,7 +34,7 @@ class LSFiles(_MutableSequence):
         """
         self.populate(exclude)
 
-    def reduce(self) -> _t.List[_Path]:
+    def reduce(self) -> list[_Path]:
         """Get all relevant python files starting from project root.
 
         :return: List of project's Python file index, reduced to their
@@ -49,7 +48,7 @@ class LSFiles(_MutableSequence):
             {project_dir / p.relative_to(project_dir).parts[0] for p in self}
         )
 
-    def args(self, reduce: bool = False) -> _t.Tuple[str, ...]:
+    def args(self, reduce: bool = False) -> tuple[str, ...]:
         """Return tuple suitable to be run with starred expression.
 
         :param reduce: :func:`~lsfiles.utils._Tree.reduce`
