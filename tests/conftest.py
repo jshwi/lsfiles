@@ -9,8 +9,8 @@ import typing as t
 from configparser import ConfigParser
 from pathlib import Path
 
+import git
 import pytest
-from gitspy import Git
 
 from lsfiles import LSFiles
 
@@ -18,13 +18,14 @@ from . import FixtureMakeTree
 from ._environ import GH_EMAIL, GH_NAME, REPO
 
 
-@pytest.fixture(name="git")
-def fixture_git() -> Git:
-    """Get instantiated ``Git`` object.
+@pytest.fixture(name="repo")
+def fixture_repo(tmp_path: Path) -> git.Repo:
+    """Get instantiated ``git.Repo`` object.
 
-    :return: Instantiated ``Git`` object.
+    :param tmp_path: Create and return temporary directory.
+    :return: Instantiated ``git.Repo`` object.
     """
-    return Git()
+    return git.Repo.init(tmp_path / REPO)
 
 
 @pytest.fixture(name="lsfiles")
@@ -41,18 +42,16 @@ def fixture_files() -> LSFiles:
 
 @pytest.fixture(name="mock_environment", autouse=True)
 def fixture_mock_environment(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, git: Git
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, repo: git.Repo
 ) -> None:
     """Mock imports to reflect the temporary testing environment.
 
     :param tmp_path: Create and return temporary directory.
     :param monkeypatch: Mock patch environment and attributes.
-    :param git: Instantiated ``Git`` object.
+    :param repo: Instantiated ``git.Repo`` object.
     """
     monkeypatch.setenv("HOME", str(tmp_path))
-    monkeypatch.setattr("os.getcwd", lambda: str(tmp_path / REPO))
-    Path.cwd().mkdir()
-    git.init(devnull=True)
+    monkeypatch.setattr("os.getcwd", lambda: os.path.dirname(repo.git_dir))
     config = ConfigParser(default_section="")
     config.read_dict(
         {

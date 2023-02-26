@@ -4,8 +4,8 @@ tests._test
 """
 from pathlib import Path
 
+import git
 import pytest
-from gitspy import Git
 
 from lsfiles import LSFiles
 
@@ -23,7 +23,7 @@ from ._environ import FILES, GITIGNORE, INIT, REPO, WHITELIST_PY
     ids=["file", NESTED, "exclude"],
 )
 def test_get_files(
-    git: Git,
+    repo: git.Repo,
     lsfiles: LSFiles,
     make_relative_file: str,
     assert_relative_item: str,
@@ -34,7 +34,7 @@ def test_get_files(
     Test for standard files, nested directories (only return the
     directory root) or files that are excluded.
 
-    :param git: Instantiated ``Git`` object.
+    :param repo: Instantiated ``git.Repo`` object.
     :param lsfiles: Instantiated ``LSFiles`` object.
     :param make_relative_file: Relative path to Python file.
     :param assert_relative_item: Relative path to Python item to check
@@ -46,7 +46,7 @@ def test_get_files(
     make_item = project_dir / assert_relative_item
     make_file.parent.mkdir(exist_ok=True, parents=True)
     make_file.touch()
-    git.add(".")
+    repo.git.add(".")
     lsfiles.populate(str(WHITELIST))
     if assert_true:
         assert make_item in lsfiles.reduce()
@@ -105,13 +105,13 @@ def test_seq(lsfiles: LSFiles) -> None:
 
 
 def test_args_reduce(
-    git: Git, lsfiles: LSFiles, make_tree: FixtureMakeTree
+    repo: git.Repo, lsfiles: LSFiles, make_tree: FixtureMakeTree
 ) -> None:
     """Demonstrate why the ``reduce`` argument should be deprecated.
 
     No longer considered depreciated.
 
-    :param git: Instantiated ``Git`` object.
+    :param repo: Instantiated ``git.Repo`` object.
     :param lsfiles: Instantiated ``LSFiles`` object.
     :param make_tree: Create directory tree from dict mapping.
     """
@@ -141,7 +141,7 @@ def test_args_reduce(
             SRC: {"__init__.py": None},
         },
     )
-    git.add(".")
+    repo.git.add(".")
     lsfiles.populate()
     normal = lsfiles.args()
     reduced = lsfiles.args(reduce=True)
@@ -185,17 +185,19 @@ def test_files_extend_no_dupes(lsfiles: LSFiles) -> None:
     assert sorted(lsfiles) == files_after
 
 
-def test_regex(lsfiles: LSFiles, git: Git, make_tree: FixtureMakeTree) -> None:
+def test_regex(
+    lsfiles: LSFiles, repo: git.Repo, make_tree: FixtureMakeTree
+) -> None:
     """Test populate with regex.
 
     :param lsfiles: Instantiated ``LSFiles`` object.
-    :param git: Instantiated ``Git`` object.
+    :param repo: Instantiated ``git.Repo`` object.
     :param make_tree: Create directory tree from dict mapping.
     """
     path1 = Path.cwd() / "docs" / "conf.py"
     path2 = Path.cwd() / WHITELIST
     make_tree(Path.cwd(), {"docs": {"conf.py": None}, WHITELIST: None})
-    git.add(".")
+    repo.git.add(".")
     lsfiles.populate_regex()
     assert path1 in lsfiles
     assert path2 in lsfiles
