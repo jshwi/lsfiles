@@ -27,13 +27,6 @@ class LSFiles(_MutableSequence[_Path]):
             ):
                 self.append(_Path.cwd() / path)
 
-    def populate_regex(self, exclude: str | None = None) -> None:
-        """Populate object with index of versioned Python files.
-
-        :param exclude: Regex of files to exclude.
-        """
-        self.populate(exclude)
-
     def reduce(self) -> list[_Path]:
         """Get all relevant python files starting from project root.
 

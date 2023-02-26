@@ -198,10 +198,10 @@ def test_regex(
     path2 = Path.cwd() / WHITELIST
     make_tree(Path.cwd(), {"docs": {"conf.py": None}, WHITELIST: None})
     repo.git.add(".")
-    lsfiles.populate_regex()
+    lsfiles.populate()
     assert path1 in lsfiles
     assert path2 in lsfiles
     lsfiles.clear()
-    lsfiles.populate_regex(r"whitelist\.py|docs\/conf\.py")
+    lsfiles.populate(r"whitelist\.py|docs\/conf\.py")
     assert path1 not in lsfiles
     assert path2 not in lsfiles
