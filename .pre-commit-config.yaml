@@ -1,6 +1,7 @@
 ci:
   skip:
     - pylint
+    - deptry
     - doctest-package
     - doctest-readme
     - mypy
@@ -8,7 +9,8 @@ ci:
     - vulture
     - tests
     - toc
-    - deptry
+    - about-tests
+    - commit-policy
 default_language_version:
   python: python3.8
 default_stages:
@@ -21,7 +23,9 @@ exclude: |
     | \.bumpversion\.cfg
     | whitelist\.py
     | \.idea\/.*
+    | tests\/TESTS\.md
     | \.github\/COMMIT_POLICY\.md
+    | docs\/conf\.py
   )$
 repos:
   - repo: local
@@ -76,14 +80,27 @@ repos:
         language: system
         entry: poetry run pyaud toc --fix
         pass_filenames: false
+      # check imports against dependencies
       - id: deptry
         name: deptry
         description: |
           deptry is a command line tool to check for issues with dependencies
           in a Python project, such as obsolete or missing dependencies.
-        entry: deptry .
+        entry: poetry run deptry .
         language: system
         always_run: true
+        pass_filenames: false
+      # check tests/TESTS.md is up-to-date
+      - id: about-tests
+        name: about tests
+        language: system
+        entry: poetry run pyaud about-tests
+        pass_filenames: false
+      # check .github/COMMIT_POLICY.md is up-to-date
+      - id: commit-policy
+        name: commit policy
+        language: system
+        entry: poetry run pyaud commit-policy
         pass_filenames: false
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v4.4.0"
@@ -138,6 +155,7 @@ repos:
         args:
           - "--recursive"
           - "--wrap-summaries=72"
+          - "--in-place"
   - repo: https://github.com/pappasam/toml-sort
     rev: "v0.22.3"
     hooks:
