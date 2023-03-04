@@ -39,8 +39,8 @@ lsfiles
 .. image:: https://img.shields.io/badge/security-bandit-yellow.svg
     :target: https://github.com/PyCQA/bandit
     :alt: Security Status
-.. image:: https://snyk.io/test/github/jshwi/pyaud/badge.svg
-    :target: https://snyk.io/test/github/jshwi/pyaud/badge.svg
+.. image:: https://snyk.io/test/github/jshwi/lsfiles/badge.svg
+    :target: https://snyk.io/test/github/jshwi/lsfiles/badge.svg
     :alt: Known Vulnerabilities
 .. image:: https://snyk.io/advisor/python/lsfiles/badge.svg
     :target: https://snyk.io/advisor/python/lsfiles
