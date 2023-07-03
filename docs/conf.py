@@ -82,7 +82,6 @@ html_theme_options = {
     "site_url": "https://lsfiles.readthedocs.io/",
     "repo_url": "https://github.com/jshwi/lsfiles/",
     "repo_name": "lsfiles",
-    "repo_type": "github",
     "edit_uri": "blob/master/docs",
     "globaltoc_collapse": True,
     "features": [
