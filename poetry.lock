@@ -1745,17 +1745,17 @@ plugins = ["importlib-metadata"]
 
 [[package]]
 name = "pylint"
-version = "2.16.2"
+version = "2.17.7"
 description = "python code static checker"
 optional = false
 python-versions = ">=3.7.2"
 files = [
-    {file = "pylint-2.16.2-py3-none-any.whl", hash = "sha256:ff22dde9c2128cd257c145cfd51adeff0be7df4d80d669055f24a962b351bbe4"},
-    {file = "pylint-2.16.2.tar.gz", hash = "sha256:13b2c805a404a9bf57d002cd5f054ca4d40b0b87542bdaba5e05321ae8262c84"},
+    {file = "pylint-2.17.7-py3-none-any.whl", hash = "sha256:27a8d4c7ddc8c2f8c18aa0050148f89ffc09838142193fdbe98f172781a3ff87"},
+    {file = "pylint-2.17.7.tar.gz", hash = "sha256:f4fcac7ae74cfe36bc8451e931d8438e4a476c20314b1101c458ad0f05191fad"},
 ]
 
 [package.dependencies]
-astroid = ">=2.14.2,<=2.16.0-dev0"
+astroid = ">=2.15.8,<=2.17.0-dev0"
 colorama = {version = ">=0.4.5", markers = "sys_platform == \"win32\""}
 dill = [
     {version = ">=0.2", markers = "python_version < \"3.11\""},
@@ -2747,4 +2747,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "4bf64a42adc3fbf1d2c13b54ff87aa566ccd3eedd2e4429eb06ddb080f435ee0"
+content-hash = "d5e20de4e6ca1d984aa4b83b6956f367f380b9bc9cdd89459de1f0495754ed1c"
