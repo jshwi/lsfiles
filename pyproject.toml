@@ -72,7 +72,7 @@ repository = "https://github.com/jshwi/lsfiles"
 version = "0.5.0"
 
 [tool.poetry.dependencies]
-gitpython = "^3.1.31"
+gitpython = "^3.1.33"
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]
