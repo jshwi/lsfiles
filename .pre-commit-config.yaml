@@ -12,6 +12,7 @@ ci:
     - deptry
     - about-tests
     - commit-policy
+    - copyright-year
 default_language_version:
   python: python3.8
 default_stages:
@@ -102,6 +103,12 @@ repos:
         name: commit policy
         language: system
         entry: poetry run pyaud commit-policy
+        pass_filenames: false
+      # check copyright year in license
+      - id: copyright-year
+        name: copyright year
+        language: system
+        entry: poetry run pyaud copyright-year
         pass_filenames: false
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v4.5.0"
