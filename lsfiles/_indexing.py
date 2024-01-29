@@ -2,6 +2,7 @@
 lsfiles._indexing
 =================
 """
+
 from __future__ import annotations
 
 import re as _re
