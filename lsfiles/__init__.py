@@ -1,4 +1,5 @@
 """Path object VC index."""
+
 from ._indexing import LSFiles
 from ._version import __version__
 
