@@ -568,18 +568,19 @@ files = [
 
 [[package]]
 name = "deptry"
-version = "0.8.0"
-description = "A command line utility to check for obsolete, missing and transitive dependencies in a Python project."
+version = "0.13.0"
+description = "A command line utility to check for unused, missing and transitive dependencies in a Python project."
 optional = false
-python-versions = ">=3.7,<4.0"
+python-versions = ">=3.8,<4.0"
 files = [
-    {file = "deptry-0.8.0-py3-none-any.whl", hash = "sha256:12f161748907781a5f6e6931694b40db7af7e0aa4b7888334a677cd4670daf7a"},
-    {file = "deptry-0.8.0.tar.gz", hash = "sha256:b15a31d4bc2c074de834ba4207b2f03e49a4bea8cb73e14e7376a26431b9c606"},
+    {file = "deptry-0.13.0-py3-none-any.whl", hash = "sha256:edee5124fbb443b3726f251d7763977237e764969d49f695cf2be43536848177"},
+    {file = "deptry-0.13.0.tar.gz", hash = "sha256:37e0277d1b7cfd94b69d502995b2e4397445a94ffb9a840d1fac3cfa3b1e387b"},
 ]
 
 [package.dependencies]
 chardet = ">=4.0.0"
 click = ">=8.0.0,<9.0.0"
+colorama = {version = ">=0.4.6", markers = "sys_platform == \"win32\""}
 pathspec = ">=0.9.0"
 tomli = {version = ">=2.0.1,<3.0.0", markers = "python_version < \"3.11\""}
 
@@ -2619,4 +2620,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "5eda8402e1c8916fdeac232a7b87b33460aaba659a30f8a6214d1287da336fb3"
+content-hash = "866aa2bac5f1c20443dce8eeb5ef4c0e4446a37e75b815751e8de17c0a4f9fab"
