@@ -4,6 +4,7 @@ tests._utils
 
 Test-wide constants.
 """
+
 from pathlib import Path
 
 FILES = "file.py"
